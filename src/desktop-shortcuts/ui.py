@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QHBoxLayout
+from PySide6.QtWidgets import QHBoxLayout, QVBoxLayout, QMenu, QFormLayout
 
 from widgets import *
 
@@ -10,20 +10,8 @@ class Waypoint(Application):
         super().__init__()
         self.__testmenu__()
 
-
     def __testmenu__(self):
-        img_input = FileBrowserImage()
-        app_input = DesktopEntryForm()
-        layout = QHBoxLayout()
-        layout.addWidget(img_input)
-        layout.addWidget(app_input)
-        layout.setAlignment(Qt.AlignmentFlag.AlignTop)
-        self.testmenu = QWidget()
-        self.testmenu.setLayout(layout)
-        self.central_widget.setCurrentIndex(0)
-        self.central_widget.addWidget(self.testmenu)
-
-
+        pass
 
     def run(self):
         self.main_window.show()

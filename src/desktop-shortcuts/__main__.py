@@ -1,10 +1,10 @@
 from ui import Waypoint
 
-def main():
+def launch():
     Waypoint().run()
 
 
 
 
 if __name__ == "__main__":
-    main()
+    launch()

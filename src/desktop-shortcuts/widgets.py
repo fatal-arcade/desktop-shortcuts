@@ -2,7 +2,6 @@ import sys
 import config
 
 from abc               import ABC, abstractmethod
-from enum              import Enum
 from typing            import Any, Callable
 from PySide6.QtGui     import QIcon, QPixmap, QCursor
 from PySide6.QtCore    import QSize, Qt
@@ -19,14 +18,6 @@ from PySide6.QtWidgets import (
     QGridLayout,
     QWidget
 )
-
-# enum
-# =============================================================================
-class FileTypeFilter(Enum):
-    ALL         = config.filter_all
-    IMAGES      = config.filter_images
-    SHORTCUTS   = config.filter_shortcuts
-
 
 # widgets
 # =============================================================================
@@ -133,7 +124,7 @@ class FileBrowserInput(QWidget):
     input  : QLineEdit
     button : QPushButton
 
-    def __init__(self, file_type:FileTypeFilter=FileTypeFilter.ALL):
+    def __init__(self, file_type:str=config.filter_all):
 
         super().__init__()
 
@@ -143,7 +134,7 @@ class FileBrowserInput(QWidget):
             filepath = qfdialog.getOpenFileName(
                 parent=None,
                 caption="Select a File",
-                dir=file_type.value,
+                dir=file_type,
                 filter=config.filter_all
             )[0]
 
@@ -161,6 +152,7 @@ class FileBrowserInput(QWidget):
         layout.addWidget(self.input, 0, 0)
         layout.addWidget(self.button, 0, 1)
         self.setLayout(layout)
+        self.setContentsMargins(0,0,0,0)
 
 class FileBrowserImage(QWidget):
 
@@ -186,7 +178,7 @@ class FileBrowserImage(QWidget):
             if filepath:
                 self.change_image(filepath)
 
-        self.filepath = config.icon_img if image_path is None else image_path
+        self.filepath = config.icon_image if image_path is None else image_path
         self.image    = create_image(self.filepath, width, height)
         self.button   = create_button('Change Icon', width, 32, open_filesystem)
 

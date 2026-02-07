@@ -8,6 +8,7 @@ app_author  = 'Fatal Arcade'
 app_version = '1.0.0'
 app_title   = ' v'.join([app_name, app_version])
 
+
 # characters and symbols
 # =============================================================================
 char_arrow_up    = '▲'
@@ -18,9 +19,9 @@ char_win_close   = '✕'
 char_win_expand  = '□'
 char_win_iconify = '−'
 
+
 # css elements
 # =============================================================================
-
 css_primary_color   = "#2e2e2e"
 css_secondary_color = "#4a4a4a"
 css_highlight_color = "#5a5a5a"
@@ -32,6 +33,7 @@ css_font_size       = '14px'
 css_border_radius   = '16px'
 css_border_style    = 'none'
 css_border_width    = '0px'
+
 
 # css theme
 # =============================================================================
@@ -108,12 +110,13 @@ filter_shortcuts    = 'Shortcuts (*.desktop)'
 
 # images and icons
 # =============================================================================
-icon_app = os.path.join(dir_assets, "logo.png")
-icon_img = os.path.join(dir_icons, "image.png")
+icon_app = os.path.join(dir_assets, 'logo.png')
+icon_image = os.path.join(dir_icons, 'image.png')
+icon_search = os.path.join(dir_icons, 'search.png')
 
 
 # window
 # =============================================================================
-win_max_size    = (600, 500)
-win_min_size    = (400, 300)
-win_size        = (500, 400)
+win_max_size    = (500, 500)
+win_min_size    = (500, 500)
+win_size        = (500, 500)

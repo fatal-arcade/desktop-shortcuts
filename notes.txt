@@ -1,0 +1,174 @@
+DESKTOP ENTRY OVERVIEW
+
+Key                     Required    Category	    Purpose
+================================================================================================================================
+Type	                ✅	        Core	        Must be Application
+Name	                ✅	        Core	        Display name shown to user
+Exec	                ✅	        Core	        Command to execute
+Icon	                ❌	        Presentation	Icon name or path
+Comment	                ❌	        Presentation	Tooltip / description
+GenericName     	    ❌	        Presentation	Describes app type
+Terminal	            ❌	        Execution	    Run in terminal
+WorkingDirectory	    ❌	        Execution	    Launch directory
+TryExec	                ❌	        Execution	    Hide if binary missing
+Categories	            ⚠️	        Discovery	    Menu placement
+Keywords	            ❌	        Discovery	    Menu search terms
+NoDisplay	            ❌	        Visibility	    Hidden from menus
+Hidden	                ❌	        Visibility	    Disable launcher
+OnlyShowIn	            ❌	        Visibility	    Limit to DEs
+NotShowIn	            ❌	        Visibility	    Exclude DEs
+StartupNotify	        ❌	        Startup	        Launch feedback
+StartupWMClass	        ❌	        Startup	        Window matching
+MimeType	            ❌	        Integration	    File type handling
+Actions	                ❌	        Actions	        Right-click actions
+DBusActivatable	        ❌	        Integration	    D-Bus activation
+PrefersNonDefaultGPU	❌	        Hardware	    Hybrid GPU hint
+SingleMainWindow	    ❌	        Windowing	    Single-window hint
+Path	                ❌	        Legacy	        Deprecated working dir
+X-*	                    ❌	        Extension	    DE / vendor extensions
+
+
+    
+EXEC OVERVIEW TABLE
+
+Feature	            Description	                    Placeholder / Syntax	Notes
+================================================================================================================================
+Basic command	    Command to run the program	    Exec=/usr/bin/firefox	Required
+Arguments	        Pass command-line arguments	    Exec=firefox %u	        %f, %F, %u, %U, %i, %c, %k
+Multiple files	    Open several files	            %F or %U	            Expands to list of files/URLs
+Single file	        Open a single file	            %f or %u	            Replaced with one file/URL
+Icon substitution	Adds icon reference	            %i	                    Resolves to -icon <Icon> if set
+Name substitution	Adds translated name	        %c	                    Replaced with Name field
+Desktop file path	Path to .desktop file	        %k	                    Replaced with absolute path of the .desktop file
+Field escaping	    Handle spaces / special chars	Quotes "..."	        Important on multi-word paths or args
+Chaining / shell	Run multiple commands	        sh -c 'cmd1; cmd2'	    Only when needed, beware security
+Environment	        Run with env variables	        env VAR=val program	    Optional, sometimes cleaner than shell wrapper
+Terminal execution	Run in terminal window	        Terminal=true	        Must match expectations for CLI apps
+Shell wildcards	    Pass glob patterns	            *	                    Rarely used in .desktop, mostly %F/%U preferred
+
+
+
+
+DETAILED EXPLANATION OF PLACEHOLDERS
+
+Placeholder	Replaces with	        Use case
+================================================================================================================================
+%f	        Single filename	        Launch app on one local file
+%F	        Multiple filenames	    Batch open files (drag/drop)
+%u	        Single URL	            Open a website or resource
+%U	        Multiple URLs	        Open multiple web resources
+%i	        Icon parameter	        Adds -icon <Icon> if relevant
+%c	        Translated Name	        Localized app name
+%k	        Desktop file path	    Full .desktop path, used for logging or launching copy
+
+
+MASTER CATEGORY TABLE (FREEDESKTOP STANDARD)
+
+Category	    Type	    Purpose / Meaning
+================================================================================================================================
+AudioVideo	    Main	    Multimedia apps
+Audio	        Sub	        Audio-only apps
+Video	        Sub	        Video-only apps
+Development	    Main	    Programming & dev tools
+Education	    Main	    Educational software
+Game	        Main	    Games
+Graphics	    Main	    Image, design, 3D tools
+Network	        Main	    Network-related apps
+Office	        Main	    Office & productivity
+Science	        Main	    Scientific software
+Settings	    Main	    System settings tools
+System	        Main	    Low-level system tools
+Utility	        Main	    Small helper utilities
+
+
+
+COMMON SUBCATEGORIES (PRACTICAL)
+Subcategory	        Typically paired with
+================================================================================================================================
+WebBrowser	        Network
+Email	            Network
+FileTransfer	    Network
+InstantMessaging	Network
+TerminalEmulator	System
+TextEditor	        Utility, Development
+IDE	                Development
+Debugger	        Development
+Building	        Development
+Player	            AudioVideo
+Recorder	        AudioVideo
+Viewer	            Graphics, Office
+VectorGraphics	    Graphics
+RasterGraphics	    Graphics
+3DGraphics	        Graphics
+Spreadsheet	        Office
+WordProcessor	    Office
+Presentation	    Office
+Calculator	        Utility
+Archiving	        Utility
+FileManager	        System
+
+
+MimeType= declares what kinds of files or data an application can open.
+This is how apps become selectable in “Open With…” and how defaults are chosen.
+
+MASTER MIMETYPE TABLE (COMMON / PRACTICAL)
+
+MIME Type	                Category        Typical App Type
+================================================================================================================================
+text/plain	                Text	        Text editors
+text/html	                Web	            Browsers, editors
+text/markdown	            Text	        Markdown editors
+application/pdf	            Document	    PDF viewers
+application/zip	            Archive	        Archive managers
+application/x-executable	Binary	        Launchers
+image/png	                Image	        Image viewers/editors
+image/jpeg	                Image	        Image viewers/editors
+image/svg+xml	            Vector	        Vector editors
+audio/mpeg	                Audio	        Music players
+audio/ogg	                Audio	        Audio players
+video/mp4	                Video	        Video players
+video/x-matroska	        Video	        Video players
+application/x-python	    Code	        IDEs/editors
+application/json	        Data	        Editors, viewers
+
+
+Relationship to Exec= (critical linkage)
+
+If you declare MimeType, your Exec= must support it.
+
+MIME usage	        Required Exec placeholder
+================================================================================================================================
+Single file	        %f
+Multiple files	    %F
+URL-based types	    %u / %U
+
+
+
+
+
+Actions= — macro overview table
+
+Actions= defines additional launcher actions, usually shown in:
+
+Right-click context menus
+
+Long-press menus (touch)
+
+Dock / panel menus (DE-dependent)
+
+
+MASTER ACTIONS TABLE
+Component	            Required	Scope	        Purpose
+================================================================================================================================
+Actions	                ❌	        Main entry	    Declares available action IDs
+[Desktop Action <ID>]	✅	        Per action	    Section defining one action
+Name	                ✅	        Per action	    Label shown to user
+Exec	                ✅	        Per action	    Command executed
+Icon	                ❌	        Per action	    Optional icon
+OnlyShowIn	            ❌	        Per action	    DE restriction
+NotShowIn	            ❌	        Per action	    DE exclusion
+
+
+
+
+
